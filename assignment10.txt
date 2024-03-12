@@ -1,0 +1,20 @@
+1)
+kd4_Abhishek_84098>select a.Sname,b.Sname,a.City from SALESPEOPLE a,SALESPEOPLE b 
+    -> where a.City = b.City and a.Sname<b.Sname;
++--------+-------+--------+
+| Sname  | Sname | City   |
++--------+-------+--------+
+| Motika | Peel  | London |
++--------+-------+--------+
+
+2)	
+kd4_Abhishek_84098>select distinct(a.Cname), b.City,a.Rating from CUSTOMERS a,CUSTOMERS b where a.Cnum = b.Cnum and a.Rating = 100;
++---------+--------+--------+
+| Cname   | City   | Rating |
++---------+--------+--------+
+| Hoffman | London |    100 |
+| Clemens | London |    100 |
+| Pereira | Rome   |    100 |
++---------+--------+--------+
+
+
