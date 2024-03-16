@@ -1,0 +1,211 @@
+1-5)
+Installation of MongoDB:-
+
+ Step 1- 
+     the public key used by the package management system-
+ 
+          sudo apt-get install gnupg curl
+   
+     To import the MongoDB public GPG key:-
+   
+          curl -fsSL https://www.mongodb.org/static/pgp/server-7.0.asc | \sudo gpg -o /usr/share/keyrings/mongodb-server-7.0.gpg \--dearmor
+   
+ 
+  Step 2- Create a list file for MongoDB:-
+ 
+ echo "deb [ arch=amd64,arm64 signed-by=/usr/share/keyrings/mongodb-server-7.0.gpg ] https://repo.mongodb.org/apt/ubuntu jammy/mongodb-org/7.0 multiverse" | sudo tee /etc/apt/sources.list.d/mongodb-org-7.0.list
+     
+     
+  Step 3- 
+   Reload local package database:-
+        sudo apt-get update
+        
+  Step 4-
+   Install the MongoDB packages:-
+        sudo apt-get install -y mongodb-org
+        
+  Step 5-
+    Start MongoDB:-
+      sudo systemctl start mongod
+      
+  Step 6-
+      Verify that MongoDB has started successfully:-
+        sudo systemctl status mongod
+  
+  Step 7-
+     Stop MongoDB:-
+       sudo systemctl stop mongod
+
+
+  Step 8-
+     Restart MongoDB:-
+        sudo systemctl restart mongod
+
+  Step 9:-
+     Begin using MongoDB:-
+         mongosh
+
+
+5)
+sunbeam@sunbeam-abhishek:~/Desktop$ mongosh
+Current Mongosh Log ID:	65f55c8b3087559220db83af
+Connecting to:		mongodb://127.0.0.1:27017/?directConnection=true&serverSelectionTimeoutMS=2000&appName=mongosh+2.2.0
+Using MongoDB:		7.0.6
+Using Mongosh:		2.2.0
+
+For mongosh info see: https://docs.mongodb.com/mongodb-shell/
+
+------
+   The server generated these startup warnings when booting
+   2024-03-15T14:48:53.318+05:30: Using the XFS filesystem is strongly recommended with the WiredTiger storage engine. See http://dochub.mongodb.org/core/prodnotes-filesystem
+   2024-03-15T14:48:53.562+05:30: Access control is not enabled for the database. Read and write access to data and configuration is unrestricted
+   2024-03-15T14:48:53.562+05:30: vm.max_map_count is too low
+------
+
+test> help
+
+6)
+CDAC> show dbs
+admin   40.00 KiB
+config  72.00 KiB
+local   72.00 KiB
+
+7)
+test> use CDAC
+switched to db CDAC
+CDAC> db
+CDAC
+
+8)
+CDAC> show collections
+
+
+9)
+CDAC> db.createCollection("LIBRARY")
+{ ok: 1 }
+CDAC> show collections
+LIBRARY
+
+
+10)
+CDAC> db.LIBRARY.insert({title:'MongoDB', auther:'Sameer', likes:100})
+DeprecationWarning: Collection.insert() is deprecated. Use insertOne, insertMany, or bulkWrite.
+{
+  acknowledged: true,
+  insertedIds: { '0': ObjectId('65f562953087559220db83b0') }
+}
+
+
+11)
+CDAC> db.LIBRARY.find()
+[
+  {
+    _id: ObjectId('65f562953087559220db83b0'),
+    title: 'MongoDB',
+    auther: 'Sameer',
+    likes: 100
+  }
+]
+
+
+12)
+CDAC> db.LIBRARY.insert({title:'MySQL programming', authers:['Jack','Jill'], likes:200})
+{
+  acknowledged: true,
+  insertedIds: { '0': ObjectId('65f563ea3087559220db83b1') }
+}
+
+
+13)
+CDAC> db.LIBRARY.find()
+[
+  {
+    _id: ObjectId('65f562953087559220db83b0'),
+    title: 'MongoDB',
+    auther: 'Sameer',
+    likes: 100
+  },
+  {
+    _id: ObjectId('65f563ea3087559220db83b1
+    title: 'MySQL programming',
+    authers: [ 'Jack', 'Jill' ],
+    likes: 200
+  }
+]
+
+
+
+14)
+CDAC> db.LIBRARY.findOne()
+{
+  _id: ObjectId('65f562953087559220db83b0'),
+  title: 'MongoDB',
+  auther: 'Sameer',
+  likes: 100
+}
+
+
+15)
+CDAC> db.LIBRARY.find().pretty()
+[
+  {
+    _id: ObjectId('65f562953087559220db83b0'),
+    title: 'MongoDB',
+    auther: 'Sameer',
+    likes: 100
+  },
+  {
+    _id: ObjectId('65f563ea3087559220db83b1'),
+    title: 'MySQL programming',
+    authers: [ 'Jack', 'Jill' ],
+    likes: 200
+  }
+]
+
+
+16)
+CDAC> db.LIBRARY.update({auther:'Sameer'},{$set:{auther:'Sameer Dehadrai'}})
+{
+  acknowledged: true,
+  insertedId: null,
+  matchedCount: 1,
+  modifiedCount: 1,
+  upsertedCount: 0
+}
+CDAC> show documents
+
+
+17)CDAC> db.LIBRARY.remove({likes:100})
+DeprecationWarning: Collection.remove() is deprecated. Use deleteOne, deleteMany, findOneAndDelete, or bulkWrite.
+{ acknowledged: true, deletedCount: 1 }
+CDAC> db.LIBRARY.find()
+[
+  {
+    _id: ObjectId('65f563ea3087559220db83b1'),
+    title: 'MySQL programming',
+    authers: [ 'Jack', 'Jill' ],
+    likes: 200
+  }
+]
+
+
+18)
+CDAC> db.LIBRARY.drop()
+true
+CDAC> show collections
+
+
+
+19)
+CDAC> db.CDAC.drop()
+true
+CDAC> db.dropDatabase()
+{ ok: 1, dropped: 'CDAC' }
+
+
+20)
+CDAC> exit
+sunbeam@sunbeam-abhishek:~/Desktop$ 
+
+
+
